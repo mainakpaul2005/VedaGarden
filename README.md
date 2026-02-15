@@ -39,10 +39,10 @@ This component serves as the accessible data hub, demonstrating proficiency in d
 
 | Feature | Description | Technical Focus |
 | :--- | :--- | :--- |
-| **Advanced Filtering** | Dynamic search interface allowing filtration by Ayurvedic properties (**Rasa, Virya, Dosha**), target ailment, and scientific compound. | Database Design (Schema), API Development. |
+| **Advanced Filtering** | Dynamic search interface allowing filtration by Ayurvedic properties (**Rasa, Virya, Dosha**), target ailment, and scientific compound. | JavaScript Data Handling, DOM Manipulation. |
 | **Structured Profiles** | Dedicated pages for each plant, cross-referencing traditional uses with modern **phytochemical profiles** and external scientific literature links (e.g., PubMed). | Information Architecture, Data Integration. |
-| **Responsive Design** | Clean, mobile-friendly interface ensures the *Materia Medica* database is accessible on all devices. | Front-End Development (**React/Vue.js**), UI/UX Principles. |
-| **Tech Stack** | **[Specify Front-end Framework, e.g., React]**, **[Specify Back-end/Database, e.g., Node.js/Python & MongoDB]**. |
+| **Responsive Design** | Clean, mobile-friendly interface ensures the *Materia Medica* database is accessible on all devices. | CSS Grid/Flexbox, Mobile-First Design, UI/UX Principles. |
+| **Tech Stack** | **HTML5**, **CSS3** (Custom Properties, Flexbox, Grid), **Vanilla JavaScript** (ES6+). |
 
 -----
 
@@ -56,8 +56,8 @@ To run the project locally, you will need:
       * A compatible PC VR Headset (Oculus/Meta, Valve Index, etc.).
       * [Specify Game Engine version, e.g., Unity 2022.3 LTS].
 2.  **Web Portal:**
-      * Node.js (LTS version)
-      * A local or cloud instance of [Specify Database, e.g., MongoDB/PostgreSQL].
+      * Any modern web browser (Chrome, Firefox, Safari, Edge).
+      * Optionally, a local development server for best experience.
 
 ### Installation and Setup
 
@@ -70,11 +70,14 @@ To run the project locally, you will need:
 
 2.  **Web Portal Setup:**
 
+    Simply open the `Web-Portal/index.html` file in your browser, or start a local server:
+
     ```bash
     cd Web-Portal/
-    npm install
-    # Set environment variables for database connection (see .env.example)
-    npm start
+    # Using Python
+    python -m http.server 3000
+    # Or using Node.js (if you have npx)
+    npx serve .
     ```
 
     The web portal will run on `http://localhost:3000`.
