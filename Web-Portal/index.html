@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VedaGarden — Ancient Wisdom, Living Knowledge</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌿</span>
+                <span class="logo-text">VedaGarden</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#plants">Explore</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <span class="hero-badge">✦ Open Knowledge Project</span>
+                <h1>Where ancient roots<br>meet <em>living research</em></h1>
+                <p class="hero-text">
+                    VedaGarden documents India's medicinal plant heritage — connecting the wisdom of Ayurveda with modern phytochemical research. No subscriptions, no barriers.
+                </p>
+                <div class="hero-actions">
+                    <a href="#plants" class="btn btn-primary">Explore the garden</a>
+                    <a href="#about" class="btn btn-secondary">Our mission</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-art">🌱</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plants Section -->
+    <section id="plants" class="plants-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Living Collection</h2>
+                <p>Twelve foundational herbs, each with thousand-year histories</p>
+            </div>
+
+            <!-- Search -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by name, Sanskrit, or use...">
+                    <button id="searchBtn" class="btn btn-search">Find</button>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label for="doshaFilter">Balances Dosha</label>
+                    <select id="doshaFilter">
+                        <option value="">Any</option>
+                        <option value="vata">Vata</option>
+                        <option value="pitta">Pitta</option>
+                        <option value="kapha">Kapha</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="rasaFilter">Rasa (Taste)</label>
+                    <select id="rasaFilter">
+                        <option value="">Any</option>
+                        <option value="madhura">Madhura (Sweet)</option>
+                        <option value="amla">Amla (Sour)</option>
+                        <option value="katu">Katu (Pungent)</option>
+                        <option value="tikta">Tikta (Bitter)</option>
+                        <option value="kashaya">Kashaya (Astringent)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="viryaFilter">Virya (Energy)</label>
+                    <select id="viryaFilter">
+                        <option value="">Any</option>
+                        <option value="ushna">Ushna (Warming)</option>
+                        <option value="sheeta">Sheeta (Cooling)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="ailmentFilter">Supports</label>
+                    <select id="ailmentFilter">
+                        <option value="">Any condition</option>
+                        <option value="stress">Calm & Sleep</option>
+                        <option value="immunity">Immunity</option>
+                        <option value="digestion">Digestion</option>
+                        <option value="inflammation">Inflammation</option>
+                        <option value="skin">Skin</option>
+                        <option value="respiratory">Respiratory</option>
+                    </select>
+                </div>
+                <button id="clearFilters" class="btn btn-secondary">Reset</button>
+            </div>
+
+            <p id="resultsCount" class="results-info">Showing all plants</p>
+
+            <!-- Grid -->
+            <div id="plantsGrid" class="plants-grid"></div>
+
+            <!-- States -->
+            <div id="loadingState" class="loading-state hidden">
+                <div class="spinner"></div>
+                <p>Loading...</p>
+            </div>
+
+            <div id="noResults" class="no-results hidden">
+                <span class="no-results-icon">🔍</span>
+                <h3>Nothing found</h3>
+                <p>Try adjusting your filters</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Three to know first</h2>
+                <p>If you're new to Ayurvedic herbs, start here</p>
+            </div>
+            <div class="featured-grid">
+                <article class="featured-card" data-plant="ashwagandha">
+                    <div class="featured-image ashwagandha-bg">🫚</div>
+                    <div class="featured-content">
+                        <h3>Ashwagandha</h3>
+                        <p class="sanskrit">अश्वगन्धा · Withania somnifera</p>
+                        <p>The great adaptogen. Used for three thousand years to build resilience, support sleep, and calm the nervous system.</p>
+                        <a href="plant.html?id=ashwagandha" class="btn btn-outline">Read more</a>
+                    </div>
+                </article>
+                <article class="featured-card" data-plant="tulsi">
+                    <div class="featured-image tulsi-bg">🌿</div>
+                    <div class="featured-content">
+                        <h3>Tulsi</h3>
+                        <p class="sanskrit">तुलसी · Ocimum sanctum</p>
+                        <p>Sacred basil. Found in nearly every Indian home — revered for respiratory support and daily wellness.</p>
+                        <a href="plant.html?id=tulsi" class="btn btn-outline">Read more</a>
+                    </div>
+                </article>
+                <article class="featured-card" data-plant="neem">
+                    <div class="featured-image neem-bg">🌳</div>
+                    <div class="featured-content">
+                        <h3>Neem</h3>
+                        <p class="sanskrit">निम्ब · Azadirachta indica</p>
+                        <p>The village pharmacy. Every part of this tree serves a purpose — from skin care to blood purification.</p>
+                        <a href="plant.html?id=neem" class="btn btn-outline">Read more</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>Why this exists</h2>
+                    <p>
+                        India's medicinal plant knowledge is scattered — trapped in dense texts, paywalled journals, or oversimplified wellness blogs. VedaGarden brings it together in one place, with proper citations and respect for both traditions.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <span class="feature-icon">📜</span>
+                            <div>
+                                <h4>Rooted in texts</h4>
+                                <p>Properties referenced from classical Ayurvedic sources</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <span class="feature-icon">🔬</span>
+                            <div>
+                                <h4>Linked to research</h4>
+                                <p>Direct connections to PubMed studies when available</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <span class="feature-icon">🌍</span>
+                            <div>
+                                <h4>Open to all</h4>
+                                <p>No accounts, no paywalls, no tracking</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="about-image-placeholder">📚</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concepts -->
+    <section class="concepts-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Ayurvedic lens</h2>
+                <p>Understanding the classification system used here</p>
+            </div>
+            <div class="concepts-grid">
+                <div class="concept-card">
+                    <div class="concept-icon">☯</div>
+                    <h3>Dosha</h3>
+                    <p>Three constitutional energies — Vata (air/space), Pitta (fire/water), Kapha (earth/water). Herbs can balance or aggravate each.</p>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-icon">👅</div>
+                    <h3>Rasa</h3>
+                    <p>The six tastes: sweet, sour, salty, pungent, bitter, astringent. Each taste carries therapeutic information.</p>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-icon">🔥</div>
+                    <h3>Virya</h3>
+                    <p>Heating or cooling effect. Determines how a substance affects metabolism and circulation.</p>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-icon">⟳</div>
+                    <h3>Vipaka</h3>
+                    <p>Post-digestive effect. How an herb influences tissues and elimination after processing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get in touch</h2>
+                <p>Found an error? Want to collaborate? We'd like to hear from you.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-form-container">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Your name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Topic</label>
+                            <select id="subject" name="subject">
+                                <option value="general">General question</option>
+                                <option value="correction">Correction or update</option>
+                                <option value="research">Research collaboration</option>
+                                <option value="other">Something else</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <h4>Email</h4>
+                            <p>hello@vedagarden.org</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <h4>Based in</h4>
+                            <p>India</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <span class="contact-icon">💻</span>
+                        <div>
+                            <h4>Source code</h4>
+                            <p>Open on GitHub</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">🌿</span>
+                        <span class="logo-text">VedaGarden</span>
+                    </a>
+                    <p>Ancient wisdom deserves modern accessibility.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigate</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#plants">Explore</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Methodology</a></li>
+                        <li><a href="#">Glossary</a></li>
+                        <li><a href="#">Contribute</a></li>
+                        <li><a href="#">API (coming)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay updated</h4>
+                    <p>Occasional emails about new plants and features.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="your@email.com">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 VedaGarden. Made with care in India.</p>
+                <div class="footer-social">
+                    <a href="#">GitHub</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="plantModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

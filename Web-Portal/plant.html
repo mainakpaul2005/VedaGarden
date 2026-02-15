@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore individual medicinal plants in the VedaGarden database - detailed Ayurvedic properties, traditional uses, and modern research.">
+    <title>Plant Details | VedaGarden</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Plant Detail Page Specific Styles */
+        .plant-hero {
+            padding: 6rem 0 4rem;
+            background: linear-gradient(to bottom, var(--cream), var(--parchment));
+        }
+        
+        .plant-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .plant-hero-emoji {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .plant-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--forest);
+            margin-bottom: 0.5rem;
+        }
+        
+        .plant-hero .sanskrit {
+            font-size: 1.5rem;
+            color: var(--terracotta);
+            margin-bottom: 0.25rem;
+        }
+        
+        .plant-hero .scientific {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .plant-detail {
+            padding: 4rem 0;
+        }
+        
+        .plant-detail-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .detail-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--clay-light);
+        }
+        
+        .detail-section:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-section h2 {
+            font-size: 1.5rem;
+            color: var(--forest);
+            margin-bottom: 1rem;
+            font-family: var(--font-display);
+        }
+        
+        .detail-section h3 {
+            font-size: 1.2rem;
+            color: var(--sage-dark);
+            margin: 1.5rem 0 0.75rem;
+        }
+        
+        .intro-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+        
+        .properties-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .properties-table th,
+        .properties-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--clay-light);
+        }
+        
+        .properties-table th {
+            font-weight: 500;
+            color: var(--text-muted);
+            width: 40%;
+        }
+        
+        .properties-table td {
+            color: var(--forest);
+        }
+        
+        .dosha-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .dosha-card {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-radius: var(--radius-lg);
+            background: var(--cream);
+        }
+        
+        .dosha-card.decrease {
+            background: rgba(125, 155, 138, 0.15);
+        }
+        
+        .dosha-card.increase {
+            background: rgba(201, 123, 99, 0.15);
+        }
+        
+        .dosha-card.neutral {
+            background: rgba(196, 167, 125, 0.15);
+        }
+        
+        .dosha-card h4 {
+            font-size: 1.1rem;
+            color: var(--forest);
+            margin-bottom: 0.25rem;
+        }
+        
+        .dosha-card .effect {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .uses-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .uses-list li {
+            position: relative;
+            padding: 0.5rem 0 0.5rem 1.5rem;
+        }
+        
+        .uses-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--sage);
+            font-weight: bold;
+        }
+        
+        .phyto-card {
+            background: var(--cream);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--sage);
+        }
+        
+        .phyto-card strong {
+            color: var(--forest);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .phyto-card p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        
+        .precaution-box {
+            background: rgba(201, 123, 99, 0.1);
+            border: 1px solid rgba(201, 123, 99, 0.3);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+        }
+        
+        .precaution-box h3 {
+            color: var(--terracotta);
+            margin-top: 0;
+        }
+        
+        .precaution-box ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+        
+        .precaution-box li {
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .reference-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .reference-list li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .reference-list a {
+            color: var(--sage-dark);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color var(--transition);
+        }
+        
+        .reference-list a:hover {
+            border-color: var(--sage);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--sage-dark);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+        
+        .back-link:hover {
+            color: var(--forest);
+        }
+        
+        .related-section {
+            background: var(--parchment);
+            padding: 4rem 0;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .related-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            transition: transform var(--transition), box-shadow var(--transition);
+            cursor: pointer;
+        }
+        
+        .related-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .related-card-emoji {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .related-card h4 {
+            color: var(--forest);
+            margin-bottom: 0.25rem;
+        }
+        
+        .related-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .disclaimer-box {
+            background: var(--cream);
+            border-radius: var(--radius);
+            padding: 1rem 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        @media (max-width: 640px) {
+            .dosha-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .properties-table th,
+            .properties-table td {
+                display: block;
+                width: 100%;
+            }
+            
+            .properties-table th {
+                padding-bottom: 0.25rem;
+                border-bottom: none;
+            }
+            
+            .properties-table td {
+                padding-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🌿</span>
+                <span class="logo-text">VedaGarden</span>
+            </a>
+            
+            <nav class="nav" id="mainNav">
+                <a href="index.html#plants" class="nav-link">Plant Database</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#concepts" class="nav-link">Concepts</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    
+    <main>
+        <section class="plant-hero">
+            <div class="container">
+                <a href="index.html#plants" class="back-link">← Back to Database</a>
+                <div class="plant-hero-content" id="plantHero">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </section>
+        
+        <section class="plant-detail">
+            <div class="container">
+                <div class="plant-detail-content" id="plantDetail">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </section>
+        
+        <section class="related-section">
+            <div class="container">
+                <h2 style="text-align: center; font-family: var(--font-display); color: var(--forest);">
+                    Explore Related Plants
+                </h2>
+                <div class="related-grid" id="relatedPlants">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">🌿</span>
+                        <span class="logo-text">VedaGarden</span>
+                    </a>
+                    <p>Connecting ancient plant wisdom with modern understanding.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <a href="index.html#plants">Plant Database</a>
+                    <a href="index.html#concepts">Ayurvedic Concepts</a>
+                    <a href="index.html#about">About the Project</a>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="#">Research Papers</a>
+                    <a href="#">Glossary</a>
+                    <a href="#">Contributing</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>For educational purposes only. This is not medical advice.</p>
+                <p>&copy; 2024 VedaGarden. Open knowledge, rooted in tradition.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/data.js"></script>
+    <script>
+        (function() {
+            'use strict';
+            
+            // Get plant ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const plantId = urlParams.get('id');
+            
+            if (!plantId) {
+                window.location.href = 'index.html#plants';
+                return;
+            }
+            
+            const plant = getPlantById(plantId);
+            
+            if (!plant) {
+                window.location.href = 'index.html#plants';
+                return;
+            }
+            
+            // Update page title
+            document.title = `${plant.name} | VedaGarden`;
+            
+            // Render hero section
+            const heroEl = document.getElementById('plantHero');
+            heroEl.innerHTML = `
+                <span class="plant-hero-emoji">${plant.emoji}</span>
+                <h1>${plant.name}</h1>
+                <p class="sanskrit">${plant.sanskritName}</p>
+                <p class="scientific">${plant.scientificName}</p>
+            `;
+            
+            // Render detail content
+            const detailEl = document.getElementById('plantDetail');
+            const props = plant.ayurvedicProperties;
+            
+            detailEl.innerHTML = `
+                <section class="detail-section">
+                    <p class="intro-text">${plant.description}</p>
+                    <p style="margin-top: 1rem; color: var(--text-muted);">
+                        <strong>Family:</strong> ${plant.family}<br>
+                        <strong>Also known as:</strong> ${plant.commonNames.join(', ')}
+                    </p>
+                </section>
+                
+                <section class="detail-section">
+                    <h2>Ayurvedic Properties</h2>
+                    
+                    <table class="properties-table">
+                        <tr>
+                            <th>Rasa (Taste)</th>
+                            <td>${props.rasaNames.join(', ')}</td>
+                        </tr>
+                        <tr>
+                            <th>Virya (Potency)</th>
+                            <td>${props.viryaName}</td>
+                        </tr>
+                        <tr>
+                            <th>Vipaka (Post-digestive effect)</th>
+                            <td>${props.vipakaName}</td>
+                        </tr>
+                        <tr>
+                            <th>Guna (Qualities)</th>
+                            <td>${props.guna.join(', ')}</td>
+                        </tr>
+                    </table>
+                    
+                    <h3>Effect on Doshas</h3>
+                    <div class="dosha-grid">
+                        ${createDoshaCards(props.doshaEffect)}
+                    </div>
+                </section>
+                
+                <section class="detail-section">
+                    <h2>Traditional Uses</h2>
+                    <ul class="uses-list">
+                        ${plant.traditionalUses.map(use => `<li>${use}</li>`).join('')}
+                    </ul>
+                </section>
+                
+                <section class="detail-section">
+                    <h2>Key Phytochemicals</h2>
+                    ${plant.phytochemicals.map(p => `
+                        <div class="phyto-card">
+                            <strong>${p.name}</strong>
+                            <p>${p.description}</p>
+                        </div>
+                    `).join('')}
+                </section>
+                
+                <section class="detail-section">
+                    <h2>Usage & Dosage</h2>
+                    <p><strong>Parts used:</strong> ${plant.partUsed.join(', ')}</p>
+                    <p><strong>Typical dosage:</strong> ${plant.dosage}</p>
+                </section>
+                
+                <section class="detail-section">
+                    <h2>Habitat & Cultivation</h2>
+                    <p>${plant.habitat}</p>
+                    <p>${plant.cultivation}</p>
+                </section>
+                
+                <section class="detail-section">
+                    <div class="precaution-box">
+                        <h3>⚠️ Precautions</h3>
+                        <ul>
+                            ${plant.precautions.map(p => `<li>${p}</li>`).join('')}
+                        </ul>
+                    </div>
+                </section>
+                
+                ${plant.references.length > 0 ? `
+                    <section class="detail-section">
+                        <h2>Research & References</h2>
+                        <ul class="reference-list">
+                            ${plant.references.map(ref => `
+                                <li><a href="${ref.url}" target="_blank" rel="noopener">${ref.title}</a></li>
+                            `).join('')}
+                        </ul>
+                    </section>
+                ` : ''}
+                
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> This information is for educational purposes only and is not intended as medical advice. 
+                    Always consult with a qualified healthcare practitioner before using any herbal remedies.
+                </div>
+            `;
+            
+            // Render related plants
+            const relatedEl = document.getElementById('relatedPlants');
+            const related = getRelatedPlants(plant, 3);
+            
+            relatedEl.innerHTML = related.map(p => `
+                <a href="plant.html?id=${p.id}" class="related-card">
+                    <div class="related-card-emoji">${p.emoji}</div>
+                    <h4>${p.name}</h4>
+                    <p>${p.sanskritName}</p>
+                </a>
+            `).join('');
+            
+            // Helper functions
+            function createDoshaCards(doshaEffect) {
+                const doshas = [
+                    { name: 'Vata', key: 'vata', desc: 'Air & Space' },
+                    { name: 'Pitta', key: 'pitta', desc: 'Fire & Water' },
+                    { name: 'Kapha', key: 'kapha', desc: 'Earth & Water' }
+                ];
+                
+                return doshas.map(d => {
+                    const effect = doshaEffect[d.key];
+                    const cls = effect === 'decreases' ? 'decrease' : 
+                               effect === 'increases' ? 'increase' : 'neutral';
+                    const text = effect === 'decreases' ? '↓ Pacifies' : 
+                                effect === 'increases' ? '↑ Increases' : '· Neutral';
+                    
+                    return `
+                        <div class="dosha-card ${cls}">
+                            <h4>${d.name}</h4>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">${d.desc}</div>
+                            <div class="effect">${text}</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            function getRelatedPlants(currentPlant, count) {
+                // Find plants with overlapping ailments
+                const others = plantsData.filter(p => p.id !== currentPlant.id);
+                
+                const scored = others.map(p => {
+                    let score = 0;
+                    currentPlant.targetAilments.forEach(a => {
+                        if (p.targetAilments.includes(a)) score += 2;
+                    });
+                    // Same virya adds some relation
+                    if (p.ayurvedicProperties.virya === currentPlant.ayurvedicProperties.virya) {
+                        score += 1;
+                    }
+                    return { plant: p, score };
+                });
+                
+                scored.sort((a, b) => b.score - a.score);
+                return scored.slice(0, count).map(s => s.plant);
+            }
+            
+            // Mobile menu toggle
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuToggle && mainNav) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+        })();
+    </script>
+</body>
+</html>
